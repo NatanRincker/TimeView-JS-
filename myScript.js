@@ -6,11 +6,12 @@ const GOOD_MORNING='Bom Dia!',
 //Design resources
 //imgPattern array helper
 const PATH_INDEX=0, BG_COLOR_INDEX=1
-const MORNING_PATTERN=0, AFTERNOON_PATTERN=1, NIGHT_PATTERN=2
+const MORNING_PATTERN=0, AFTERNOON_PATTERN=1, NIGHT_PATTERN=2,DAWN_PATTERN=3
 const imgPattern = [
     ['img/morning.png','#68a3cb'],
     ['img/afternoon.png','#f0d2a0'],
-    ['img/night.png','#3d2640']
+    ['img/night.png','#3d2640'],
+    ['img/dawn.png','#2a538b'],
 ]
 
 var hour, curPatternIndex
@@ -27,7 +28,7 @@ function writeMessage(){
     msg.innerHTML+='</br>'+writeHour()
 }
 function writeWelcome(){
-    if(hour==0 || hour<=12){
+    if(hour==0 || hour<12){
         return GOOD_MORNING
     }else if(hour<=18){
         return GOOD_AFTERNOON
@@ -42,7 +43,7 @@ function writeHour(){
 function setDesign(){
     switch(writeWelcome()){
         case GOOD_MORNING:
-            curPatternIndex=MORNING_PATTERN
+            curPatternIndex=(hour<6)? DAWN_PATTERN:MORNING_PATTERN
         break
         case GOOD_AFTERNOON:
             curPatternIndex=AFTERNOON_PATTERN
